@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CK Senio Trip</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f8f9fa; }
-        header { background-color: #007BFF; color: white; padding: 15px; font-size: 24px; }
+        body { font-family: Arial, sans-serif; text-align: center; background: url('travel-background.jpg') no-repeat center center fixed; background-size: cover; }
+        header { background-color: rgba(0, 123, 255, 0.8); color: white; padding: 15px; font-size: 24px; }
         .container { margin: 20px auto; width: 80%; max-width: 800px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
         .button { background-color: #007BFF; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
         .button:hover { background-color: #0056b3; }
+        .offer { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 5px; background: #fff; }
+        .offer img { width: 100%; height: auto; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -19,20 +21,62 @@
     <div class="container">
         <h2>Objevujte svět bezpečně a pohodlně</h2>
         <p>Speciální zájezdy pro seniory s asistencí a individuální péčí.</p>
-        <button class="button">Zobrazit nabídku zájezdů</button>
-        <h3>Naše služby:</h3>
-        <ul>
-            <li>Bezpečné a komfortní ubytování</li>
-            <li>Zdravotní asistence 24/7</li>
-            <li>Mezigenerační zájezdy</li>
-            <li>Jednoduchá online rezervace</li>
-        </ul>
+        <h3>Nabídka zájezdů</h3>
+        <div class="offer">
+            <img src="euro-trip.jpg" alt="Euro Trip">
+            <h4>Poznávací zájezd po Evropě</h4>
+            <p>14 dní | Plná penze | Zdravotní asistence</p>
+            <p><strong>29 900 Kč</strong></p>
+            <button class="button" onclick="openForm('Poznávací zájezd po Evropě', 29900)">Rezervovat</button>
+        </div>
+        <div class="offer">
+            <img src="spa-retreat.jpg" alt="Spa Retreat">
+            <h4>Wellness a lázně</h4>
+            <p>10 dní | Termální prameny | Relaxační program</p>
+            <p><strong>24 500 Kč</strong></p>
+            <button class="button" onclick="openForm('Wellness a lázně', 24500)">Rezervovat</button>
+        </div>
+        <div class="offer">
+            <img src="family-trip.jpg" alt="Family Trip">
+            <h4>Mezigenerační zájezd</h4>
+            <p>7 dní | Rodinné aktivity | Vnoučata zdarma</p>
+            <p><strong>19 900 Kč</strong></p>
+            <button class="button" onclick="openForm('Mezigenerační zájezd', 19900)">Rezervovat</button>
+        </div>
         <h3>Kontaktujte nás:</h3>
         <p>Telefon: +420 123 456 789</p>
         <p>Email: info@seniotrip.cz</p>
     </div>
+    
+    <div id="orderForm" class="container" style="display:none;">
+        <h3>Objednávkový formulář</h3>
+        <p id="selectedTrip"></p>
+        <form>
+            <label for="name">Jméno:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="payment">Způsob platby:</label>
+            <select id="payment" name="payment">
+                <option value="card">Kreditní karta</option>
+                <option value="bank">Bankovní převod</option>
+            </select><br><br>
+            
+            <button type="submit" class="button">Odeslat objednávku</button>
+        </form>
+        <button class="button" onclick="closeForm()">Zavřít</button>
+    </div>
+    
+    <script>
+        function openForm(trip, price) {
+            document.getElementById("selectedTrip").innerText = "Zájezd: " + trip + " | Cena: " + price + " Kč";
+            document.getElementById("orderForm").style.display = "block";
+        }
+        function closeForm() {
+            document.getElementById("orderForm").style.display = "none";
+        }
+    </script>
 </body>
 </html>
-
-
-
