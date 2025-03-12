@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CK Senio Trip</title>
+    <title>CK Senio Trip – Cestovní e-shop</title>
     <style>
         body { font-family: Arial, sans-serif; background: url('travel-background.jpg') no-repeat center center fixed; background-size: cover; }
         header { background-color: rgba(0, 123, 255, 0.9); color: white; padding: 20px; text-align: center; font-size: 28px; font-weight: bold; }
         nav { background: white; padding: 15px; text-align: center; }
-        nav a { margin: 0 15px; text-decoration: none; color: #007BFF; font-weight: bold; }
-        .hero { text-align: center; padding: 50px; background: rgba(255, 255, 255, 0.8); margin: 20px auto; width: 80%; border-radius: 10px; }
-        .button { background-color: #007BFF; color: white; padding: 15px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; }
-        .button:hover { background-color: #0056b3; }
-        .container { margin: 20px auto; width: 80%; max-width: 1000px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        nav a { margin: 0 15px; text-decoration: none; color: #007BFF; font-weight: bold; cursor: pointer; }
+        .container { margin: 20px auto; width: 80%; max-width: 1000px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); display: none; }
+        .active { display: block; }
         .offer { border-bottom: 1px solid #ddd; padding: 15px; display: flex; align-items: center; }
         .offer img { width: 150px; height: auto; margin-right: 20px; border-radius: 5px; }
         .offer-details { flex: 1; }
+        .button { background-color: #007BFF; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        .button:hover { background-color: #0056b3; }
     </style>
     <script>
-        function openForm(trip, price) {
-            document.getElementById("selectedTrip").innerText = "Zájezd: " + trip + " | Cena: " + price + " Kč";
-            document.getElementById("orderForm").style.display = "block";
-        }
-        function closeForm() {
-            document.getElementById("orderForm").style.display = "none";
+        function showPage(pageId) {
+            document.querySelectorAll('.container').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
     </script>
 </head>
 <body>
     <header>
-        CK Senio Trip – Cestování bez starostí
+        <img src="logo.png" alt="Logo CK Senio Trip" style="height: 50px;"> CK Senio Trip – Cestování bez starostí
     </header>
     <nav>
-        <a href="#">Domů</a>
-        <a href="#nabidka">Nabídka zájezdů</a>
-        <a href="#kontakt">Kontakt</a>
+        <a onclick="showPage('home')">Domů</a>
+        <a onclick="showPage('nabidka')">Nabídka zájezdů</a>
+        <a onclick="showPage('kategorie')">Kategorie</a>
+        <a onclick="showPage('novinky')">Novinky</a>
+        <a onclick="showPage('kontakt')">Kontakt</a>
     </nav>
-    <div class="hero">
-        <h1>Objevujte svět bezpečně a pohodlně</h1>
-        <p>Speciální zájezdy pro seniory s asistencí a individuální péčí.</p>
-        <button class="button" onclick="location.href='#nabidka'">Prohlédnout zájezdy</button>
+    
+    <div id="home" class="container active">
+        <h2>Vítejte na CK Senio Trip!</h2>
+        <p>Objevujte svět bezpečně a pohodlně s naší speciální nabídkou pro seniory.</p>
     </div>
+    
     <div id="nabidka" class="container">
         <h2>Nabídka zájezdů</h2>
         <div class="offer">
@@ -49,45 +49,25 @@
                 <h4>Poznávací zájezd po Evropě</h4>
                 <p>14 dní | Plná penze | Zdravotní asistence</p>
                 <p><strong>29 900 Kč</strong></p>
-                <button class="button" onclick="openForm('Poznávací zájezd po Evropě', 29900)">Rezervovat</button>
-            </div>
-        </div>
-        <div class="offer">
-            <img src="spa-retreat.jpg" alt="Spa Retreat">
-            <div class="offer-details">
-                <h4>Wellness a lázně</h4>
-                <p>10 dní | Termální prameny | Relaxační program</p>
-                <p><strong>24 500 Kč</strong></p>
-                <button class="button" onclick="openForm('Wellness a lázně', 24500)">Rezervovat</button>
-            </div>
-        </div>
-        <div class="offer">
-            <img src="family-trip.jpg" alt="Family Trip">
-            <div class="offer-details">
-                <h4>Mezigenerační zájezd</h4>
-                <p>7 dní | Rodinné aktivity | Vnoučata zdarma</p>
-                <p><strong>19 900 Kč</strong></p>
-                <button class="button" onclick="openForm('Mezigenerační zájezd', 19900)">Rezervovat</button>
+                <button class="button">Rezervovat</button>
             </div>
         </div>
     </div>
-    <div id="orderForm" class="container" style="display:none;">
-        <h3>Objednávkový formulář</h3>
-        <p id="selectedTrip"></p>
-        <form>
-            <label for="name">Jméno:</label>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="payment">Způsob platby:</label>
-            <select id="payment" name="payment">
-                <option value="card">Kreditní karta</option>
-                <option value="bank">Bankovní převod</option>
-            </select><br><br>
-            <button type="submit" class="button">Odeslat objednávku</button>
-        </form>
-        <button class="button" onclick="closeForm()">Zavřít</button>
+    
+    <div id="kategorie" class="container">
+        <h2>Kategorie zájezdů</h2>
+        <ul>
+            <li>Poznávací zájezdy</li>
+            <li>Wellness a lázně</li>
+            <li>Mezigenerační zájezdy</li>
+        </ul>
     </div>
+    
+    <div id="novinky" class="container">
+        <h2>Novinky</h2>
+        <p>Připravujeme nové destinace pro rok 2025!</p>
+    </div>
+    
     <div id="kontakt" class="container">
         <h2>Kontaktujte nás</h2>
         <p>Telefon: +420 123 456 789</p>
@@ -95,8 +75,10 @@
     </div>
 </body>
 </html>
-       
-      
+
+
+  
+
 
       
     
